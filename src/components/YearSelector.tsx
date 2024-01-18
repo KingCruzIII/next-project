@@ -28,42 +28,44 @@ const YearSelector = () => {
   };
 
   return (
-    <Box padding="1rem 0 0 0" width="4rem">
-      <Button
-        size="large"
-        variant="text"
-        id="demo-positioned-button"
-        aria-controls={open ? "demo-positioned-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        {seasonYear}
-      </Button>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "center",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "center",
-          horizontal: "center",
-        }}
-      >
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <YearCalendar
-            minDate={minDate}
-            maxDate={maxDate}
-            defaultValue={date}
-            onChange={handleDateChange}
-          />
-        </LocalizationProvider>
-      </Menu>
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Box padding="1rem 0 0 0" width="4rem">
+        <Button
+          size="large"
+          variant="text"
+          id="demo-positioned-button"
+          aria-controls={open ? "demo-positioned-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        >
+          {seasonYear}
+        </Button>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "center",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "center",
+            horizontal: "center",
+          }}
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <YearCalendar
+              minDate={minDate}
+              maxDate={maxDate}
+              defaultValue={date}
+              onChange={handleDateChange}
+            />
+          </LocalizationProvider>
+        </Menu>
+      </Box>
     </Box>
   );
 };

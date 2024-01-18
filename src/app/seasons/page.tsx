@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const CurrentSeason = () => {
   const getSeason = (d: Date) => Math.floor((d.getMonth() / 12) * 4) % 4;
@@ -6,8 +6,7 @@ const CurrentSeason = () => {
   const seasonYear = date.getFullYear().toString();
   const season = ["winter", "spring", "summer", "fall"][getSeason(new Date())];
 
-  // return redirect(`/seasons/${seasonYear}/${season}`);
-  return <div />;
+  return redirect(`/seasons/${seasonYear}/${season}`);
 };
 
 export default CurrentSeason;

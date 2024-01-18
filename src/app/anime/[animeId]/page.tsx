@@ -12,7 +12,7 @@ import Image from "next/image";
 const animeId = async ({ params }: { params: { animeId: string } }) => {
   const mediaId = params.animeId || "";
 
-  const x: Record<string, string> = { thing: "other", potato: "butter" };
+  // const x: Record<string, string> = { thing: "other", potato: "butter" };
   const requestBody = {
     query: `
     query Query($mediaId: Int) {
@@ -73,100 +73,86 @@ const animeId = async ({ params }: { params: { animeId: string } }) => {
   const item = response.data.Media;
 
   return (
-    <>
-      <Grid justifyContent="center" padding="1rem" container spacing={2}>
-        <Grid lg="auto" display="flex" justifyContent="center" md={12}>
-          <Image
-            width={460}
-            height={652}
-            src={item?.coverImage.extraLarge}
-            alt={item.title.english || item.title.native}
-          />
-        </Grid>
-        <Grid lg md>
-          <Paper>
-            <Box
-              alignItems="center"
-              padding="1rem"
-              display="flex"
-              flexDirection="column"
-            >
-              <Typography padding={"0 0 .5rem 0"} variant="h3">
-                {item?.title?.english || item?.title?.native}
-              </Typography>
-              <Divider variant="middle" flexItem />
-              <Box padding=".5rem 0" display="flex" alignItems="center">
-                <Box
-                  padding="0 1rem 0 0"
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                >
-                  <Typography>Score</Typography>
-                  <Typography>
-                    {item.averageScore ? item.averageScore : "Not Yet Scored"}
-                  </Typography>
-                </Box>
-                <Divider variant="middle" orientation="vertical" flexItem />
-                <Box
-                  padding="0 1rem 0 1rem"
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                >
-                  <Typography>Popularity</Typography>
-                  <Typography>#{item.popularity}</Typography>
-                </Box>
-                <Divider variant="middle" orientation="vertical" flexItem />
-                <Box display="flex" alignContent="center">
-                  <Typography padding="0 1rem 0 1rem">{`${item.season} ${item.seasonYear}`}</Typography>
-                </Box>
-              </Box>
-              <Divider variant="middle" flexItem />
-              <Typography padding=".5rem 0">Genres</Typography>
-              <Box>
-                {item.genres?.map((genre: string) => {
-                  return <Chip key={"genre-" + genre} label={genre} />;
-                })}
-              </Box>
-            </Box>
-          </Paper>
-          <Typography padding=".5rem 0" variant="h5">
-            Synopsis
-          </Typography>
-          <Divider flexItem />
-          <Typography padding=".5rem 0" variant="body2" color="text.secondary">
-            {item.description?.replaceAll(/(<i>|<br>|<\/i>|<\/br>)/g, "")}
-          </Typography>
-          <Divider flexItem />
-
-          {item?.trailer?.id ? (
-            <Box
-              padding="1rem 0 0 0"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-            >
-              <YouTubePlayer videoId={item?.trailer?.id} />
-            </Box>
-          ) : (
-            ""
-          )}
-        </Grid>
+    <Grid justifyContent="center" padding="1rem" container spacing={2}>
+      <Grid lg="auto" display="flex" justifyContent="center" md={12}>
+        <Image
+          width={460}
+          height={652}
+          src={item?.coverImage.extraLarge}
+          alt={item.title.english || item.title.native}
+        />
       </Grid>
-      {/* <Grid container spacing={2}>
-        <Grid lg="auto" display="flex" justifyContent="center" md={12} sm={12}>
-          <Box width={460}>
-            <Typography>asdf</Typography>
+      <Grid lg md>
+        <Paper>
+          <Box
+            alignItems="center"
+            padding="1rem"
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography padding={"0 0 .5rem 0"} variant="h3">
+              {item?.title?.english || item?.title?.native}
+            </Typography>
+            <Divider variant="middle" flexItem />
+            <Box padding=".5rem 0" display="flex" alignItems="center">
+              <Box
+                padding="0 1rem 0 0"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <Typography>Score</Typography>
+                <Typography>
+                  {item.averageScore ? item.averageScore : "Not Yet Scored"}
+                </Typography>
+              </Box>
+              <Divider variant="middle" orientation="vertical" flexItem />
+              <Box
+                padding="0 1rem 0 1rem"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <Typography>Popularity</Typography>
+                <Typography>#{item.popularity}</Typography>
+              </Box>
+              <Divider variant="middle" orientation="vertical" flexItem />
+              <Box display="flex" alignContent="center">
+                <Typography padding="0 1rem 0 1rem">{`${item.season} ${item.seasonYear}`}</Typography>
+              </Box>
+            </Box>
+            <Divider variant="middle" flexItem />
+            <Typography padding=".5rem 0">Genres</Typography>
+            <Box>
+              {item.genres?.map((genre: string) => {
+                return <Chip key={"genre-" + genre} label={genre} />;
+              })}
+            </Box>
           </Box>
-        </Grid>
-        <Grid lg md={12} sm={12}>
-          <Box width={460}>
-            <Typography>qqqq</Typography>
+        </Paper>
+        <Typography padding=".5rem 0" variant="h5">
+          Synopsis
+        </Typography>
+        <Divider flexItem />
+        <Typography padding=".5rem 0" variant="body2" color="text.secondary">
+          {item.description?.replaceAll(/(<i>|<br>|<\/i>|<\/br>)/g, "")}
+        </Typography>
+        <Divider flexItem />
+
+        {item?.trailer?.id ? (
+          <Box
+            padding="1rem 0 0 0"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <YouTubePlayer videoId={item?.trailer?.id} />
           </Box>
-        </Grid>
-      </Grid> */}
-    </>
+        ) : (
+          ""
+        )}
+      </Grid>
+    </Grid>
   );
 };
 
