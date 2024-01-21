@@ -2,38 +2,30 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { Box, Link as MuiLink, Paper, Tooltip } from "@mui/material";
+import { GmpMediaFragment } from "@/generated/graphql";
 
-type MediaType = {
-  title: {
-    english: string;
-    native: string;
-  };
-  description: string;
-  id: number;
-  coverImage: {
-    large: string;
-  };
-};
-
-const AnimeCoverList = ({ list = [] }: { list: MediaType[] }) => {
+const AnimeCoverList = ({
+  list,
+}: {
+  list: Array<GmpMediaFragment | null> | null | undefined;
+}) => {
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
-      {list.map((item: MediaType) => {
+      {list?.map((item: GmpMediaFragment | null) => {
+        if (!item) return "";
         const description = item.description
           ? item.description
               .replaceAll(/(<i>|<br>|<\/i>|<\/br>)/g, "")
               .slice(0, 100)
               .trim()
           : "";
+        const title = item.title?.english || item.title?.native || "";
         return (
           <Paper
             sx={{ margin: "1rem .5rem .5rem .5rem", width: 230 }}
             key={item.id}
           >
-            <Tooltip
-              placement="top"
-              title={item.title.english || item.title.native}
-            >
+            <Tooltip placement="top" title={title}>
               <Box display="flex" flexDirection="column">
                 <MuiLink
                   underline="none"
@@ -45,8 +37,8 @@ const AnimeCoverList = ({ list = [] }: { list: MediaType[] }) => {
                   <Image
                     width={230}
                     height={326}
-                    src={item.coverImage.large}
-                    alt={item.title.english || item.title.native}
+                    src={item.coverImage?.large || ""}
+                    alt={title}
                   />
                 </MuiLink>
                 <MuiLink
@@ -59,7 +51,7 @@ const AnimeCoverList = ({ list = [] }: { list: MediaType[] }) => {
                   overflow="hidden"
                   padding=".5rem"
                 >
-                  {item.title.english || item.title.native}
+                  {title}
                 </MuiLink>
               </Box>
             </Tooltip>

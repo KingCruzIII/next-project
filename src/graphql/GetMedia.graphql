@@ -1,0 +1,51 @@
+query GetMediaQuery($mediaId: Int) {
+  Media(id: $mediaId) {
+    id
+    popularity
+    season
+    seasonYear
+    title {
+      english
+      native
+    }
+    coverImage {
+      extraLarge
+      large
+      medium
+    }
+    meanScore
+    type
+    trending
+    trailer {
+      thumbnail
+      site
+      id
+    }
+    tags {
+      id
+      name
+      description
+      category
+      rank
+      isGeneralSpoiler
+      isMediaSpoiler
+      isAdult
+      userId
+    }
+    startDate {
+      year
+      month
+      day
+    }
+    endDate {
+      year
+      month
+      day
+    }
+    volumes
+    episodes
+    genres
+    description
+    averageScore
+  }
+}

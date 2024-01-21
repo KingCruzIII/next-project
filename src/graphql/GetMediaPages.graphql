@@ -1,0 +1,48 @@
+fragment GMPMedia on Media {
+  title {
+    english
+    native
+  }
+  description
+  id
+  coverImage {
+    medium
+    large
+  }
+  rankings {
+    id
+    rank
+    type
+    format
+    year
+    season
+    allTime
+    context
+  }
+}
+
+query GetMediaPages(
+  $season: MediaSeason
+  $year: Int
+  $format: MediaFormat
+  $genre: String
+  $search: String
+  $sort: [MediaSort]
+  $statusIn: [MediaStatus]
+  $type: MediaType
+) {
+  Page {
+    media(
+      season: $season
+      seasonYear: $year
+      format: $format
+      genre: $genre
+      search: $search
+      sort: $sort
+      status_in: $statusIn
+      type: $type
+    ) {
+      ...GMPMedia
+    }
+  }
+}

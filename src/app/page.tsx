@@ -1,38 +1,39 @@
-import { get } from "@/clients/anilist";
-// import AnimeCoverList from "@/components/AnimeCoverList";
+import { get, getClient } from "@/clients/anilist";
+import AnimeCoverList from "@/components/AnimeCoverList";
+import { gql } from "@apollo/client";
 import { redirect } from "next/navigation";
 
+export const revalidate = 3600;
+
 const Home = async () => {
-  return redirect(`/seasons`);
-  // const seasonYear = "2024";
-  // const season = "SPRING";
+  // return redirect(`/seasons`);
+  const seasonYear = "2024";
+  const season = "SPRING";
 
-  // const requestBody = {
-  //   query: `
-  //     query($season: MediaSeason, $seasonYear: Int) {
-  //       Page {
-  //         media(season: $season, seasonYear: $seasonYear) {
-  //           title {
-  //             english
-  //             native
-  //           }
-  //           description
-  //           id
-  //           coverImage {
-  //             large
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `,
-  //   variables: { seasonYear, season },
-  // };
+  const query = gql`
+    query ($season: MediaSeason, $seasonYear: Int) {
+      Page {
+        media(season: $season, seasonYear: $seasonYear) {
+          title {
+            english
+            native
+          }
+          description
+          id
+          coverImage {
+            large
+          }
+        }
+      }
+    }
+  `;
 
-  // const response = await get(requestBody);
+  const variables = { seasonYear, season };
 
-  // const itemData = response.data["Page"]["media"];
-  // return <div />;
-  // return <AnimeCoverList list={itemData} />;
+  const { data } = await getClient().query({ query, variables });
+
+  const itemData = data["Page"]["media"];
+  return <AnimeCoverList list={itemData} />;
 };
 
 export default Home;

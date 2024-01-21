@@ -6,7 +6,7 @@ const CurrentSeason = () => {
   const seasonYear = date.getFullYear().toString();
   const season = ["winter", "spring", "summer", "fall"][getSeason(new Date())];
 
-  return redirect(`/seasons/${seasonYear}/${season}`);
+  // return redirect(`/seasons/${seasonYear}/${season}`);
 };
 
 export default CurrentSeason;

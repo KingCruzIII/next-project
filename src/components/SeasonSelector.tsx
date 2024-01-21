@@ -1,5 +1,5 @@
 "use client";
-import { Divider, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import NextLink from "next/link";
 import { useParams } from "next/navigation";
 
@@ -18,8 +18,6 @@ const SeasonSelector = () => {
           />
         ))}
       </Tabs>
-      {/* For some un-godly reason not having this pages divider here breaks building */}
-      <Divider flexItem variant="middle" />
     </>
   );
 };

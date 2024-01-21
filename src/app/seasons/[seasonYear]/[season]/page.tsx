@@ -1,46 +1,27 @@
-import { get } from "@/clients/anilist";
 import { redirect } from "next/navigation";
+import { getClient } from "@/clients/anilist";
 import AnimeCoverList from "@/components/AnimeCoverList";
-
+import { GetMediaPagesQuery } from "@/generated/graphql";
+import { GetMediaPages } from "@/graphql/GetMediaPages.graphql";
 type SeasonPropType = {
   params: { seasonYear: string; season: string };
 };
 
 const Season = async ({ params }: SeasonPropType) => {
   const seasonYear = params.seasonYear || "";
-  const season = params.season?.toUpperCase() || "";
+  let season = params.season?.toUpperCase() || "";
   if (!["winter", "spring", "summer", "fall"].includes(params.season))
     return redirect(`/seasons`);
-  const requestBody = {
-    query: `
-      query($season: MediaSeason, $seasonYear: Int) {
-        Page {
-          media(season: $season, seasonYear: $seasonYear) {
-            title {
-              english
-              native
-            }
-            description
-            id
-            coverImage {
-              large
-            }
-          }
-        }
-      }
-    `,
-    variables: { seasonYear, season },
-  };
+  const type = "ANIME";
+  const variables = { seasonYear, season, type };
+  const { data } = await getClient().query<GetMediaPagesQuery>({
+    query: GetMediaPages,
+    variables,
+  });
+  const page = data.Page;
+  let media = page?.media;
 
-  const response = await get(requestBody || {});
-
-  const itemData = response?.data?.Page?.media;
-
-  return (
-    <>
-      <AnimeCoverList list={itemData} />
-    </>
-  );
+  return <AnimeCoverList list={media} />;
 };
 
 export default Season;

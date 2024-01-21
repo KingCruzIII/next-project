@@ -1,0 +1,11 @@
+schema: https://graphql.anilist.co # point to your GraphQL server
+documents: "src/graphql/**/*.{graphql,gql}"
+# documents: "src/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.tsx: # Where you want the generated files to go
+    plugins:
+      - typescript # For base TypeScript types
+      - typescript-operations # For operation types (query/mutation/subscription)
+      # - introspection
+    config:
+      maybeValue: 'T | null | undefined'

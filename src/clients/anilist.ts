@@ -1,19 +1,16 @@
-type QueryBody = {
-  query: string;
-  variables: Record<string, string>;
-};
+// https://studio.apollographql.com/sandbox/explorer
+import { HttpLink, gql } from "@apollo/client";
+import {
+  NextSSRInMemoryCache,
+  NextSSRApolloClient,
+} from "@apollo/experimental-nextjs-app-support/ssr";
+import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 
-export const get = async (queryBody: QueryBody) => {
-  const headers = {
-    "content-type": "application/json",
-  };
-  const options = {
-    method: "POST",
-    headers,
-    body: JSON.stringify(queryBody),
-  };
-  const response = await (
-    await fetch("https://graphql.anilist.co", options)
-  ).json();
-  return response;
-};
+export const { getClient } = registerApolloClient(() => {
+  return new NextSSRApolloClient({
+    cache: new NextSSRInMemoryCache(),
+    link: new HttpLink({
+      uri: "https://graphql.anilist.co",
+    }),
+  });
+});
