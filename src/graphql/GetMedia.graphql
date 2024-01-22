@@ -1,4 +1,4 @@
-query GetMediaQuery($mediaId: Int) {
+query GetMedia($mediaId: Int) {
   Media(id: $mediaId) {
     id
     popularity

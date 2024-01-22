@@ -36,7 +36,7 @@ const SearchPage = async ({ params, searchParams }: SearchPagePropType) => {
 
   const mediaQuery = await getClient().query<GetMediaPagesQuery>({
     query: GetMediaPages,
-    variables: { ...defaultParams, ...searchParams },
+    variables: { ...defaultParams },
   });
 
   return (

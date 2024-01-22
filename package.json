@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "pre": "graphql-codegen",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -21,7 +22,6 @@
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
     "@mui/material-nextjs": "^5.15.3",
-    "@mui/x-date-pickers": "^6.19.0",
     "dayjs": "^1.11.10",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",

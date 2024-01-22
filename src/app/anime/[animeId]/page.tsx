@@ -74,7 +74,7 @@ const animeId = async ({ params }: { params: { animeId: string } }) => {
             <Divider variant="middle" flexItem />
             <Typography padding=".5rem 0">Genres</Typography>
             <Box>
-              {item?.genres?.map((genre: string | null) => {
+              {item?.genres?.map((genre: string | null | undefined) => {
                 return <Chip key={"genre-" + genre} label={genre} />;
               })}
             </Box>
