@@ -29,7 +29,6 @@ const Home = async () => {
     query: GetFrontPage,
     variables: { ...defaultParams },
   });
-  console.log(mediaQuery);
 
   return (
     <Box

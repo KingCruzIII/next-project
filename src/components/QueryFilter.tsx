@@ -96,7 +96,6 @@ const QueryFilter = ({ genres }: QueryFilterProps) => {
     (name: string, value: string) => {
       let params = getSearchParamsObject(searchParams);
       params[name] = params[name].filter((item) => item !== value);
-      console.log(params[name]);
       router.push(pathname + "?" + convertObjectToParamString(params));
     },
     [searchParams]
@@ -147,54 +146,59 @@ const QueryFilter = ({ genres }: QueryFilterProps) => {
   const nextYear = new Date().getFullYear() + 1;
   const dateCount = nextYear - 1990;
   return (
-    <Box padding="0 5rem">
+    <>
       <Box display="flex" padding="2rem 0 1rem" justifyContent="space-between">
-        <TextField
-          sx={{ width: "12rem" }}
-          label="Search"
-          id="search-field"
-          value={search}
-          onChange={handleSearchChange}
-        />
-        <GeneralSelect
-          defaultValue={nextYear}
-          id="year-select"
-          label="Year"
-          value={paramYear}
-        >
-          {Array.from(Array(dateCount), (_, index) => {
-            const year = nextYear - index;
-            return (
-              <MenuItem
-                // *shrug* https://github.com/mui/material-ui/issues/16846
-                component={Link as any}
-                href={pathname + "?" + replaceParam("year", year.toString())}
-                key={"year-select-" + year}
-                value={year || ""}
-              >
-                {year}
-              </MenuItem>
-            );
-          })}
-        </GeneralSelect>
-        <CustomValueSelect
-          id="genres-select"
-          label="Genres"
-          value={paramGenres}
-        >
-          {genres?.map((item, index) => {
-            return (
-              <MenuItem
-                component={Link as any}
-                href={pathname + "?" + addParam("genres", item || "")}
-                key={"genre-item-" + index}
-                value={item || ""}
-              >
-                {item}
-              </MenuItem>
-            );
-          })}
-        </CustomValueSelect>
+        <Box width="12rem" marginRight=".5rem">
+          <TextField
+            label="Search"
+            id="search-field"
+            value={search}
+            onChange={handleSearchChange}
+          />
+        </Box>
+        <Box width="12rem" marginRight=".5rem">
+          <GeneralSelect
+            defaultValue={nextYear}
+            id="year-select"
+            label="Year"
+            value={paramYear}
+          >
+            {Array.from(Array(dateCount), (_, index) => {
+              const year = nextYear - index;
+              return (
+                <MenuItem
+                  // *shrug* https://github.com/mui/material-ui/issues/16846
+                  component={Link as any}
+                  href={pathname + "?" + replaceParam("year", year.toString())}
+                  key={"year-select-" + year}
+                  value={year || ""}
+                >
+                  {year}
+                </MenuItem>
+              );
+            })}
+          </GeneralSelect>
+        </Box>
+        <Box width="12rem" marginRight=".5rem">
+          <CustomValueSelect
+            id="genres-select"
+            label="Genres"
+            value={paramGenres}
+          >
+            {genres?.map((item, index) => {
+              return (
+                <MenuItem
+                  component={Link as any}
+                  href={pathname + "?" + addParam("genres", item || "")}
+                  key={"genre-item-" + index}
+                  value={item || ""}
+                >
+                  {item}
+                </MenuItem>
+              );
+            })}
+          </CustomValueSelect>
+        </Box>
         <GeneralSelect id="Season-select" label="Season" value={paramSeason}>
           {[
             MediaSeason.Winter,
@@ -217,7 +221,7 @@ const QueryFilter = ({ genres }: QueryFilterProps) => {
         </GeneralSelect>
       </Box>
 
-      <Box display="flex" alignItems="center" flexWrap="wrap">
+      <Box display="flex">
         <Box
           visibility={
             paramYear || paramSeason || paramGenres.length
@@ -257,7 +261,7 @@ const QueryFilter = ({ genres }: QueryFilterProps) => {
           );
         })}
       </Box>
-    </Box>
+    </>
   );
 };
 

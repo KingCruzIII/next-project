@@ -1,6 +1,6 @@
 "use client";
-import { useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 type YouTubePlayerPropType = {
   videoId: string;

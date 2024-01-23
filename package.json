@@ -5,7 +5,7 @@
   "scripts": {
     "pre": "graphql-codegen",
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn pre && next build",
     "start": "next start",
     "lint": "next lint",
     "next": "next",

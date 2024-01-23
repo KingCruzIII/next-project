@@ -15,8 +15,7 @@ type SearchPagePropType = {
   searchParams: Record<string, string | string[]>;
 };
 
-const SearchPage = async ({ params, searchParams }: SearchPagePropType) => {
-  console.log(searchParams);
+const SearchPage = async ({ searchParams }: SearchPagePropType) => {
   const paramYear = searchParams.year?.toString() || "";
   const paramSeason = searchParams.season?.toString() || "";
   const paramSearch = searchParams.search?.toString() || null;
@@ -50,8 +49,15 @@ const SearchPage = async ({ params, searchParams }: SearchPagePropType) => {
   });
 
   return (
-    <Box margin="auto">
-      <QueryFilter genres={genreQuery.data.GenreCollection} />
+    <Box margin="0 auto">
+      <Box
+        display="flex"
+        flexDirection="column"
+        margin="0 auto"
+        alignItems="center"
+      >
+        <QueryFilter genres={genreQuery.data.GenreCollection} />
+      </Box>
       <Box display="flex" flexWrap="wrap" justifyContent="center">
         <AnimeCoverList
           size="large"
