@@ -1,6 +1,6 @@
 "use client";
-import { Tab, Tabs } from "@mui/material";
 import NextLink from "next/link";
+import { Tab, Tabs } from "@mui/material";
 import { useParams } from "next/navigation";
 
 const SeasonSelector = () => {

@@ -1,7 +1,7 @@
+import { Box } from "@mui/material";
+import type { Metadata } from "next";
 import Theme from "@/components/Theme";
 import Header from "@/components/Header";
-import type { Metadata } from "next";
-import { Box } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Create Next App",

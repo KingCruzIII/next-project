@@ -1,15 +1,11 @@
+import Image from "next/image";
+import { Box } from "@mui/system";
 import { getClient } from "@/clients/anilist";
+import Grid from "@mui/material/Unstable_Grid2";
+import { GetMediaQuery } from "@/generated/graphql";
+import { GetMedia } from "@/graphql/GetMedia.graphql";
 import YouTubePlayer from "@/components/YouTubePlayer";
 import { Chip, Divider, Paper, Typography } from "@mui/material/index";
-import Grid from "@mui/material/Unstable_Grid2";
-import { Box } from "@mui/system";
-import Image from "next/image";
-import { GetMedia } from "@/graphql/GetMedia.graphql";
-import { GetMediaQuery } from "@/generated/graphql";
-
-// xl = 460x652
-// l = 230x326
-// m = 100x142
 
 const animeId = async ({ params }: { params: { animeId: string } }) => {
   const mediaId = params.animeId || "";

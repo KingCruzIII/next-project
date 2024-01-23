@@ -1,19 +1,19 @@
 "use client";
-import { Box, Chip, MenuItem, TextField, debounce } from "@mui/material";
 
+import Link from "next/link";
+import { Sell } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
+import useDebounce from "@/hooks/useDebounce";
+import GeneralSelect from "./inputs/GeneralSelect";
+import { useCallback, useEffect, useState } from "react";
+import CustomValueSelect from "./inputs/CustomValueSelect";
+import { Box, Chip, MenuItem, TextField } from "@mui/material";
 import { GetGenreCollectionQuery, MediaSeason } from "@/generated/graphql";
 import {
   ReadonlyURLSearchParams,
   usePathname,
   useSearchParams,
 } from "next/navigation";
-import CustomValueSelect from "./inputs/CustomValueSelect";
-import Link from "next/link";
-import GeneralSelect from "./inputs/GeneralSelect";
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import useDebounce from "@/hooks/useDebounce";
-import { Sell } from "@mui/icons-material";
 
 type QueryFilterProps = {
   genres: GetGenreCollectionQuery["GenreCollection"];

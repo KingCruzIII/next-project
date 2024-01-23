@@ -1,11 +1,11 @@
 "use client";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { colors, responsiveFontSizes } from "@mui/material";
-import { CssBaseline } from "@mui/material";
 import { ReactNode } from "react";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import createCache from "@emotion/cache";
+import { CssBaseline } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
+import { colors, responsiveFontSizes } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 
 const theme = responsiveFontSizes(
   createTheme({

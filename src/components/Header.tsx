@@ -1,9 +1,9 @@
+import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
+import { Home } from "@mui/icons-material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { Home } from "@mui/icons-material";
 const Header = () => {
   return (
     <AppBar position="static">
@@ -18,6 +18,7 @@ const Header = () => {
         >
           <Home />
         </IconButton>
+        <Button href="/search/anime">Search</Button>
         <Typography variant="h6" component="div">
           {/* <Button href="/seasons">Seasons</Button> */}
         </Typography>
