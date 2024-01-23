@@ -1,6 +1,12 @@
 "use client";
-import { FormControl, InputLabel, OutlinedInput, Select } from "@mui/material";
-import ChipValue from "./ChipValue";
+import {
+  Box,
+  Chip,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  Select,
+} from "@mui/material";
 import React from "react";
 
 const CustomValueSelect = <T,>({
@@ -23,11 +29,18 @@ const CustomValueSelect = <T,>({
         multiple
         value={value}
         input={<OutlinedInput id={id + "-input"} label={label} />}
-        renderValue={(selected) =>
-          selected?.map((value: React.ReactNode) => (
-            <ChipValue key={value?.toString()} value={value} />
-          ))
-        }
+        renderValue={(selected) => {
+          return (
+            <Box display="flex" height="23px">
+              <Chip size="small" label={selected[0]} />
+              {selected.length > 1 ? (
+                <Chip size="small" label={"+" + (selected.length - 1)} />
+              ) : (
+                ""
+              )}
+            </Box>
+          );
+        }}
       >
         {children}
       </Select>

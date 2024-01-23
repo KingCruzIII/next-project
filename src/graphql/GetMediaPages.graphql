@@ -25,7 +25,7 @@ query GetMediaPages(
   $season: MediaSeason
   $year: Int
   $format: MediaFormat
-  $genre: String
+  $genres: [String]
   $search: String
   $sort: [MediaSort]
   $statusIn: [MediaStatus]
@@ -36,7 +36,7 @@ query GetMediaPages(
       season: $season
       seasonYear: $year
       format: $format
-      genre: $genre
+      genre_in: $genres
       search: $search
       sort: $sort
       status_in: $statusIn

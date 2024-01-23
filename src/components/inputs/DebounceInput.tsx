@@ -20,7 +20,7 @@ const DebounceInput = <T,>({
   };
   useEffect(() => {
     onChange(search);
-  }, [onChangeDebounced, onChange, search]);
+  }, [onChangeDebounced]);
   return (
     <TextField
       sx={{ width: "12rem" }}

@@ -7,8 +7,10 @@ const GeneralSelect = ({
   value,
   label,
   id,
+  defaultValue,
 }: {
   value: React.ReactNode;
+  defaultValue?: React.ReactNode;
   children: React.ReactNode;
   label: string;
   id: string;
@@ -20,6 +22,7 @@ const GeneralSelect = ({
         labelId={id + "-label"}
         id={id}
         value={value}
+        defaultValue=""
         input={<OutlinedInput id={id + "-input"} label={label} />}
       >
         {children}

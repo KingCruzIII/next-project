@@ -12,14 +12,20 @@ import { GetGenreCollection } from "@/graphql/GetGenreCollection.graphql";
 
 type SearchPagePropType = {
   params: { year: string; season: string };
-  searchParams: ReadonlyURLSearchParams;
+  searchParams: Record<string, string | string[]>;
 };
 
 const SearchPage = async ({ params, searchParams }: SearchPagePropType) => {
+  console.log(searchParams);
+  const paramYear = searchParams.year?.toString() || "";
+  const paramSeason = searchParams.season?.toString() || "";
+  const paramSearch = searchParams.search?.toString() || "";
+  const paramGenres = searchParams.genres || "";
+
   const getSeason = (d: Date) => Math.floor((d.getMonth() / 12) * 4) % 4;
   const date = new Date();
-  const seasonYear = date.getFullYear().toString();
-  const season = [
+  const defaultSeasonYear = date.getFullYear().toString();
+  const defaultSeason = [
     MediaSeason.Winter,
     MediaSeason.Spring,
     MediaSeason.Summer,
@@ -27,9 +33,10 @@ const SearchPage = async ({ params, searchParams }: SearchPagePropType) => {
   ][getSeason(new Date())];
 
   const defaultParams = {
-    year: parseInt(seasonYear),
-    season: season,
+    year: paramYear || parseInt(defaultSeasonYear),
+    season: paramSeason.toUpperCase() || defaultSeason,
   };
+
   const genreQuery = await getClient().query<GetGenreCollectionQuery>({
     query: GetGenreCollection,
   });
